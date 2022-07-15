@@ -1,6 +1,7 @@
 class Reservation < ApplicationRecord
   has_many :tickets, inverse_of: :reservation
   belongs_to :event, optional: true
+  belongs_to :user, optional: true
 
   include AASM
 

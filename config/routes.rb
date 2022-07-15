@@ -1,16 +1,17 @@
 Rails.application.routes.draw do
 
-  get "/index", to: "reservations#index"
-  post "/create", to: "reservations#create"
-  get "/even", to: "tickets#make_even"
-  get "/reservation_list", to: "reservation#get_reserved_tickets"
+  # get "/index", to: "reservations#index"
+  # post "/create", to: "reservations#create"
   
   root "welcome#home"
 
-  resources :reservations do
-    member do
-      patch 'reserve'
-      patch 'pay'
+  namespace :api do
+    namespace :v1 do
+      resources :reservations, only: [:index, :create] do 
+        member do
+          patch 'pay'
+        end
+      end
     end
   end
 end
